@@ -1,0 +1,16 @@
+[package]
+name = "nle_app"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+nle_core = { path = "../nle_core" }
+nle_utils = { path = "../nle_utils" }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+log = { workspace = true }
+env_logger = { workspace = true }
+
+[[bin]]
+name = "nle_headless_test"
+path = "src/bin/nle_headless_test.rs"

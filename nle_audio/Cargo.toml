@@ -1,0 +1,11 @@
+[package]
+name = "nle_audio"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cpal = "0.15"
+rubato = "0.14"
+crossbeam-channel = { workspace = true }
+anyhow = { workspace = true }
+log = { workspace = true }

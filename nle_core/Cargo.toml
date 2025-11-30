@@ -1,0 +1,15 @@
+[package]
+name = "nle_core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+nle_data = { path = "../nle_data" }
+nle_media = { path = "../nle_media" }
+nle_render = { path = "../nle_render" }
+nle_audio = { path = "../nle_audio" }
+nle_utils = { path = "../nle_utils" }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+log = { workspace = true }
+crossbeam-channel = { workspace = true }

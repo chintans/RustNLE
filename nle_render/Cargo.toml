@@ -1,0 +1,11 @@
+[package]
+name = "nle_render"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wgpu = { workspace = true }
+bytemuck = { workspace = true }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+log = { workspace = true }

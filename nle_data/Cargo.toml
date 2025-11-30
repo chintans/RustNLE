@@ -1,0 +1,11 @@
+[package]
+name = "nle_data"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rkyv = { version = "0.7", features = ["validation"] }
+rangemap = "1.4"
+uuid = { workspace = true }
+serde = { workspace = true }
+anyhow = { workspace = true }
