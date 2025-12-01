@@ -64,23 +64,3 @@ jobs:
           path: target/release/
           if-no-files-found: warn
 
-  deploy:
-    name: Deploy to S3
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: Deploy to S3
-        run: |
-          # Replace 'your-s3-bucket-name' with your actual bucket name
-          aws s3 cp artifacts/ s3://your-s3-bucket-name/ --recursive
