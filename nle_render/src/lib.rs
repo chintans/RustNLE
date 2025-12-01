@@ -1,5 +1,5 @@
 use anyhow::Result;
-use wgpu;
+pub use wgpu;
 
 pub trait RenderNode {
     fn update(&mut self, _queue: &wgpu::Queue) {}

@@ -1,5 +1,4 @@
 use anyhow::Result;
-use nle_core; // We need to expose something from core to use here
 
 #[tokio::main]
 async fn main() -> Result<()> {
