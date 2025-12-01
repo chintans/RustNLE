@@ -1,6 +1,5 @@
 use anyhow::Result;
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
-use std::sync::{Arc, Mutex};
 
 pub struct AudioEngine {
     _stream: cpal::Stream,
