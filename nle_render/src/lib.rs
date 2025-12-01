@@ -14,14 +14,39 @@ pub struct RenderEngine {
 impl RenderEngine {
     pub async fn new() -> Result<Self> {
         let instance = wgpu::Instance::new(wgpu::InstanceDescriptor::default());
-        let adapter = instance
+
+        // Try HighPerformance first
+        let mut adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
                 power_preference: wgpu::PowerPreference::HighPerformance,
                 force_fallback_adapter: false,
                 compatible_surface: None,
             })
-            .await
-            .ok_or_else(|| anyhow::anyhow!("No suitable adapter found"))?;
+            .await;
+
+        // Fallback to any power preference
+        if adapter.is_none() {
+            adapter = instance
+                .request_adapter(&wgpu::RequestAdapterOptions {
+                    power_preference: wgpu::PowerPreference::None,
+                    force_fallback_adapter: false,
+                    compatible_surface: None,
+                })
+                .await;
+        }
+
+        // Fallback to software renderer (e.g. llvmpipe on Linux CI)
+        if adapter.is_none() {
+            adapter = instance
+                .request_adapter(&wgpu::RequestAdapterOptions {
+                    power_preference: wgpu::PowerPreference::None,
+                    force_fallback_adapter: true,
+                    compatible_surface: None,
+                })
+                .await;
+        }
+
+        let adapter = adapter.ok_or_else(|| anyhow::anyhow!("No suitable adapter found"))?;
 
         let (device, queue) = adapter
             .request_device(
