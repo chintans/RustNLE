@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const docsEntries = await getCollection('docs');
+  return docsEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title || 'Documentation'}>
+  <div class="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 py-10 hidden lg:block border-r border-white/10 pr-8 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
+      <h3 class="font-bold text-lg mb-4 text-white">Documentation</h3>
+      <ul class="space-y-2">
+        <li><a href="/RustNLE/docs/readme" class={`block px-3 py-2 rounded-md text-sm transition-colors ${Astro.url.pathname.includes('readme') ? 'bg-orange-500/10 text-orange-500' : 'text-gray-400 hover:text-orange-500'}`}>Overview</a></li>
+        <li><a href="/RustNLE/docs/technical-spec" class={`block px-3 py-2 rounded-md text-sm transition-colors ${Astro.url.pathname.includes('technical-spec') ? 'bg-orange-500/10 text-orange-500' : 'text-gray-400 hover:text-orange-500'}`}>Technical Spec</a></li>
+        <li><a href="/RustNLE/docs/phase1" class={`block px-3 py-2 rounded-md text-sm transition-colors ${Astro.url.pathname.includes('phase1') ? 'bg-orange-500/10 text-orange-500' : 'text-gray-400 hover:text-orange-500'}`}>Phase 1 Roadmap</a></li>
+      </ul>
+    </aside>
+
+    <!-- Content -->
+    <article class="flex-1 py-10 lg:pl-10 prose prose-invert prose-orange max-w-none">
+      <Content />
+    </article>
+  </div>
+</Layout>

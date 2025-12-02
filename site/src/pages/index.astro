@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Rust-NLE: Professional Video Editing in Rust">
+	<div class="relative overflow-hidden">
+		<!-- Hero Section -->
+		<section class="relative pt-20 pb-32 lg:pt-32 lg:pb-40">
+			<div class="absolute inset-0 -z-10">
+				<div class="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-[#0f0f11] to-[#0f0f11]"></div>
+				<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-orange-600/10 blur-[100px] rounded-full"></div>
+			</div>
+			
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+				<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8">
+					<span class="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+						Professional Editing.
+					</span>
+					<br />
+					<span class="bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+						Powered by Rust.
+					</span>
+				</h1>
+				<p class="mt-6 max-w-2xl mx-auto text-xl text-gray-400">
+					A high-performance, non-linear video editor built for stability and speed. 
+					Leveraging modern GPU acceleration and Rust's memory safety.
+				</p>
+				<div class="mt-10 flex justify-center gap-4">
+					<a href="/RustNLE/docs/technical-spec" class="px-8 py-3 rounded-full bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold hover:from-orange-500 hover:to-red-500 transition-all shadow-lg shadow-orange-900/20">
+						Read the Spec
+					</a>
+					<a href="https://github.com/chintans/RustNLE" class="px-8 py-3 rounded-full bg-white/10 text-white font-semibold hover:bg-white/20 transition-all backdrop-blur-sm border border-white/10">
+						View on GitHub
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Features Grid -->
+		<section class="py-20 bg-[#0a0a0c]">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/50 transition-colors group">
+						<div class="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center mb-6 group-hover:bg-orange-500/30 transition-colors">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold mb-4">Memory Safe</h3>
+						<p class="text-gray-400">Built with Rust to eliminate segmentation faults and crashes common in legacy C++ NLEs.</p>
+					</div>
+					<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/50 transition-colors group">
+						<div class="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center mb-6 group-hover:bg-orange-500/30 transition-colors">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold mb-4">GPU Accelerated</h3>
+						<p class="text-gray-400">Powered by wgpu for cross-platform, zero-copy video processing and rendering.</p>
+					</div>
+					<div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/50 transition-colors group">
+						<div class="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center mb-6 group-hover:bg-orange-500/30 transition-colors">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold mb-4">Split-State Arch</h3>
+						<p class="text-gray-400">Decoupled UI and Render Engine ensures a responsive interface even under heavy load.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Architecture Preview -->
+		<section class="py-20 border-t border-white/10">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+					<div>
+						<h2 class="text-3xl font-bold mb-6">Modern Architecture</h2>
+						<div class="space-y-6 text-gray-400">
+							<p>
+								Rust-NLE adopts a Split-State Architecture to decouple the user interface from the heavy processing engines.
+							</p>
+							<ul class="space-y-4">
+								<li class="flex items-start">
+									<span class="w-2 h-2 mt-2 rounded-full bg-orange-500 mr-4"></span>
+									<span><strong>Application State:</strong> Centralized, in-memory database protected by Arc/RwLock.</span>
+								</li>
+								<li class="flex items-start">
+									<span class="w-2 h-2 mt-2 rounded-full bg-orange-500 mr-4"></span>
+									<span><strong>Render Pipeline:</strong> DAG executor communicating with GPU via wgpu.</span>
+								</li>
+								<li class="flex items-start">
+									<span class="w-2 h-2 mt-2 rounded-full bg-orange-500 mr-4"></span>
+									<span><strong>Audio Subsystem:</strong> High-priority thread for mixing and VST3 hosting.</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="mt-10 lg:mt-0 relative">
+						<div class="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-600/20 blur-3xl rounded-full"></div>
+						<div class="relative bg-[#1a1a1c] border border-white/10 rounded-xl p-6 shadow-2xl">
+							<pre class="text-sm text-gray-300 overflow-x-auto"><code>// Core Engine Structure
+pub struct Engine &#123;
+    state: Arc&lt;RwLock&lt;Project&gt;&gt;,
+    renderer: RenderPipeline,
+    audio: AudioMixer,
+    ui: UserInterface,
+&#125;
+
+// Zero-Copy Frame Handling
+pub enum FrameData &#123;
+    DmaBuf(RawFd),      // Linux
+    Dx12Handle(isize),  // Windows
+    MetalRef(*mut c_void), // macOS
+&#125;</code></pre>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</Layout>

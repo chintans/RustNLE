@@ -1,0 +1,81 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Rust-NLE: A High-Performance, Professional Non-Linear Video Editor in Rust" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-[#0f0f11] text-white font-inter">
+		<nav class="fixed top-0 w-full z-50 bg-[#0f0f11]/80 backdrop-blur-md border-b border-white/10">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex items-center justify-between h-16">
+					<div class="flex items-center">
+						<a href="/RustNLE/" class="text-xl font-bold bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+							Rust-NLE
+						</a>
+					</div>
+					<div class="hidden md:block">
+						<div class="ml-10 flex items-baseline space-x-4">
+							<a href="/RustNLE/" class="hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+							<a href="/RustNLE/docs/technical-spec" class="hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Specs</a>
+							<a href="/RustNLE/docs/phase1" class="hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Roadmap</a>
+							<a href="https://github.com/chintans/RustNLE" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full text-sm font-medium transition-colors">GitHub</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<main class="pt-16">
+			<slot />
+		</main>
+		<footer class="border-t border-white/10 mt-20 py-10 bg-[#0a0a0c]">
+			<div class="max-w-7xl mx-auto px-4 text-center text-gray-500">
+				<p>&copy; {new Date().getFullYear()} Rust-NLE Project. Open Source.</p>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--accent: 255, 87, 34;
+		--accent-light: 255, 138, 101;
+		--accent-dark: 191, 54, 12;
+	}
+	html {
+		font-family: 'Inter', system-ui, sans-serif;
+		background: #0f0f11;
+		scroll-behavior: smooth;
+	}
+	body {
+		margin: 0;
+	}
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #0f0f11;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
