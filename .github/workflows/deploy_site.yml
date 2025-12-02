@@ -2,8 +2,7 @@ name: Deploy Astro Site to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: [ gh-pages ]
 
 permissions:
   contents: read
