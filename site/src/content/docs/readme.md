@@ -2,7 +2,7 @@
 
 **A High-Performance, Professional Non-Linear Video Editor in Rust**
 
-Rust-NLE is an ambitious project to build a modern, stable, and high-performance video editing application designed to replicate the core functionality of industry standards like Adobe Premiere Pro, but with the safety and concurrency benefits of the Rust programming language.
+Rust-NLE is an ambitious project to build a modern, stable, and high-performance video editing application designed to provide professional-grade functionality, with the safety and concurrency benefits of the Rust programming language.
 
 ## 🎯 Objective
 
@@ -33,6 +33,43 @@ We are currently in the initial phase of development, focusing on building a hea
 *   Mix audio streams.
 *   Composite frames using GPU compute shaders.
 *   Verify functionality without a GUI.
+
+## 🗺️ Roadmap & Comparison
+
+### Why Rust-NLE?
+
+| Feature | Legacy NLEs | Rust-NLE |
+| :--- | :---: | :---: |
+| **Memory Safety** | ❌ (Manual Management) | ✅ (Rust Ownership) |
+| **Crash Resilience** | ❌ (Frequent Crashes) | ✅ (Safe Concurrency) |
+| **Zero-Copy Pipeline** | ❌ (Legacy Bottlenecks) | ✅ (Modern WGPU) |
+| **Startup Time** | ❌ (Slow) | ✅ (Instant) |
+| **Modern UI** | ❌ (Legacy Frameworks) | ✅ (GPU-Accelerated) |
+
+### Phased Development
+
+#### ✅ Phase 1: The Core Engine (Current)
+- [x] Asynchronous Video Decoding (FFmpeg)
+- [x] Audio Mixing Engine (CPAL)
+- [x] GPU Compositing (WGPU)
+- [x] Headless Rendering Test
+
+#### 🚧 Phase 2: The UI Skeleton (Next)
+- [ ] Makepad UI Integration
+- [ ] Source & Program Monitors
+- [ ] Basic Timeline Visualization
+- [ ] File Import Workflow
+
+#### 📅 Phase 3: The Editor
+- [ ] Timeline Editing Tools (Ripple, Roll, Slip, Slide)
+- [ ] Undo/Redo System (rkyv snapshots)
+- [ ] Project Persistence (Save/Load)
+
+#### 📅 Phase 4: Professional Features
+- [ ] VST3 Plugin Hosting
+- [ ] Color Grading (OCIO)
+- [ ] Export/Render Queue
+- [ ] WASM Plugin System
 
 ## 🛠️ Prerequisites
 

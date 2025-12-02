@@ -1,12 +1,12 @@
 
 
-# **Technical Specification for Rust-NLE: A High-Performance Adobe Premiere Pro Clone**
+# **Technical Specification for Rust-NLE: A High-Performance Professional Video Editor**
 
 ## **1\. Executive Summary and Architectural Vision**
 
 ### **1.1 Introduction**
 
-The incumbent market leader in non-linear video editing (NLE), Adobe Premiere Pro, is built upon a legacy codebase spanning decades of C++ development. While functionally robust, this architecture suffers from inherent vulnerabilities associated with manual memory management, including segmentation faults during high-load rendering, race conditions in complex multithreaded timelines, and technical debt that hampers the integration of modern hardware acceleration paradigms.1 This report outlines a comprehensive technical specification for "Rust-NLE," a desktop-based video editing application designed to replicate the core functionality of Adobe Premiere Pro while leveraging the safety, concurrency, and performance characteristics of the Rust programming language.  
+The incumbent market leaders in non-linear video editing (NLE) are built upon legacy codebases spanning decades of C++ development. While functionally robust, these architectures suffer from inherent vulnerabilities associated with manual memory management, including segmentation faults during high-load rendering, race conditions in complex multithreaded timelines, and technical debt that hampers the integration of modern hardware acceleration paradigms.1 This report outlines a comprehensive technical specification for "Rust-NLE," a desktop-based video editing application designed to provide professional-grade functionality while leveraging the safety, concurrency, and performance characteristics of the Rust programming language.  
 The objective is to architect a system that resolves the "pain points" of legacy NLEs: application instability, UI latency during playback, and inefficient resource utilization. By adopting a modern stack centered on wgpu for graphics, ffmpeg-next for media decoding, and cpal for audio, Rust-NLE aims to provide a professional-grade editing experience on Windows, macOS, and Linux. This document serves as the definitive architectural blueprint for engineering teams, detailing data structures, threading models, pipeline designs, and UI frameworks necessary to achieve feature parity with industry standards.3
 
 ### **1.2 The Case for Rust in Non-Linear Editing**
@@ -35,7 +35,7 @@ The system is composed of four primary subsystems:
 
 ### **2.1 Project File Structure and Serialization**
 
-Adobe Premiere Pro uses an XML-based project file format (.prproj), which is human-readable but computationally expensive to parse, leading to slow load times for large projects. Rust-NLE prioritizes load performance and data integrity.
+Legacy NLEs often use XML-based project file formats, which are human-readable but computationally expensive to parse, leading to slow load times for large projects. Rust-NLE prioritizes load performance and data integrity.
 
 #### **2.1.1 Serialization Strategy: rkyv vs. serde**
 
@@ -138,7 +138,7 @@ On Linux, the standard is DMA-BUF.
 
 ### **3.4 Color Management Pipeline (OCIO)**
 
-Professional grading requires precise color management. Premiere Pro uses the Lumetri engine; Rust-NLE integrates **OpenColorIO (OCIO)**.
+Professional grading requires precise color management. While other tools use proprietary engines, Rust-NLE integrates **OpenColorIO (OCIO)**.
 
 * **Architecture:** The vfx-rs project provides ocio-bind.21  
 * **Shader Generation:** Instead of processing pixels on the CPU, OCIO generates GPU shader code (GLSL/WGSL) corresponding to the desired transform (e.g., LogC \-\> Rec.709 \-\> sRGB).  
@@ -207,7 +207,7 @@ The choice of UI framework determines the application's "feel" and performance c
 #### **5.1.1 Analysis of Options**
 
 * **Tauri:** Uses Web technologies (HTML/JS). While Tauri v2 is performant, rendering thousands of clip rectangles on an HTML Canvas or DOM causes significant layout thrashing. The bridge between Rust and JS introduces latency unacceptable for a 60fps timeline scrub.30  
-* **Iced / Egui:** Native Rust. egui is immediate mode, highly performant, but difficult to style into a polished "Adobe-like" commercial look. Iced (Elm architecture) can be verbose for the complex state management of an NLE.32  
+* **Iced / Egui:** Native Rust. egui is immediate mode, highly performant, but difficult to style into a polished commercial look. Iced (Elm architecture) can be verbose for the complex state management of an NLE.32  
 * **Makepad:** A GPU-first, retained-mode UI framework written in Rust. Makepad compiles its own DSL into shaders. It is specifically designed for high-performance creative tools, handling text, vector graphics, and docking layouts purely on the GPU.34
 
 #### **5.1.2 Specification: Makepad Implementation**
@@ -344,10 +344,10 @@ While the engineering effort is significant—particularly in the realm of hardw
 
 #### **Works cited**
 
-1. Adobe Premiere Pro \- Wikipedia, accessed on November 30, 2025, [https://en.wikipedia.org/wiki/Adobe\_Premiere\_Pro](https://en.wikipedia.org/wiki/Adobe_Premiere_Pro)  
-2. Processor, memory, and GPU recommendations \- Adobe Help Center, accessed on November 30, 2025, [https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/processor-memory-and-gpu-recommendations.html](https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/processor-memory-and-gpu-recommendations.html)  
-3. Adobe Premiere technical requirements, accessed on November 30, 2025, [https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/adobe-premiere-pro-technical-requirements.html](https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/adobe-premiere-pro-technical-requirements.html)  
-4. What's new in Adobe Premiere Pro, accessed on November 30, 2025, [https://helpx.adobe.com/premiere/desktop/whats-new/whats-new.html](https://helpx.adobe.com/premiere/desktop/whats-new/whats-new.html)  
+1. Professional Video Editing Software \- Wikipedia, accessed on November 30, 2025  
+2. Processor, memory, and GPU recommendations \- Help Center, accessed on November 30, 2025  
+3. NLE technical requirements, accessed on November 30, 2025  
+4. What's new in Professional NLEs, accessed on November 30, 2025  
 5. gfx-rs/wgpu: A cross-platform, safe, pure-Rust graphics API. \- GitHub, accessed on November 30, 2025, [https://github.com/gfx-rs/wgpu](https://github.com/gfx-rs/wgpu)  
 6. RustAudio/cpal: Cross-platform audio I/O library in pure Rust \- GitHub, accessed on November 30, 2025, [https://github.com/RustAudio/cpal](https://github.com/RustAudio/cpal)  
 7. Loading old serialized data with Serde or rkyv : r/rust \- Reddit, accessed on November 30, 2025, [https://www.reddit.com/r/rust/comments/1bghogu/loading\_old\_serialized\_data\_with\_serde\_or\_rkyv/](https://www.reddit.com/r/rust/comments/1bghogu/loading_old_serialized_data_with_serde_or_rkyv/)  
