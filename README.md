@@ -2,7 +2,7 @@
 
 **A High-Performance, Professional Non-Linear Video Editor in Rust**
 
-Rust-NLE is an ambitious project to build a modern, stable, and high-performance video editing application designed to replicate the core functionality of industry standards like Adobe Premiere Pro, but with the safety and concurrency benefits of the Rust programming language.
+Rust-NLE is an ambitious project to build a modern, stable, and high-performance video editing application designed to provide professional-grade functionality, with the safety and concurrency benefits of the Rust programming language.
 
 ## 🎯 Objective
 
@@ -43,6 +43,30 @@ To build and run Rust-NLE, you need:
     *   **Windows**: You may need to set `FFMPEG_DIR` environment variable pointing to your FFmpeg installation (with include/lib folders).
     *   **Linux**: Install `ffmpeg-dev` or equivalent (e.g., `libavcodec-dev`, `libavformat-dev`, `libavutil-dev`, `libswscale-dev`, `libavfilter-dev`, `libavdevice-dev`).
     *   **macOS**: `brew install ffmpeg`
+    
+## 📦 Installation
+
+You can download the pre-built binaries for Windows, macOS, and Linux from the [GitHub Releases](https://github.com/chintans/RustNLE/releases) page.
+
+### Running the CLI
+
+#### Windows
+1. Download `nle-cli-windows.exe`.
+2. Open PowerShell or Command Prompt.
+3. Run: `.\nle-cli-windows.exe`
+
+#### Linux
+1. Download `nle-cli-linux`.
+2. Open Terminal.
+3. Make executable: `chmod +x nle-cli-linux`
+4. Run: `./nle-cli-linux`
+
+#### macOS
+1. Download `nle-cli-macos`.
+2. Open Terminal.
+3. Make executable: `chmod +x nle-cli-macos`
+4. Run: `./nle-cli-macos`
+
 
 ## 💻 Setup & Usage
 
