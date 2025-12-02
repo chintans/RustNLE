@@ -7,7 +7,7 @@
 ### **1.1 Introduction**
 
 The incumbent market leader in non-linear video editing (NLE), Adobe Premiere Pro, is built upon a legacy codebase spanning decades of C++ development. While functionally robust, this architecture suffers from inherent vulnerabilities associated with manual memory management, including segmentation faults during high-load rendering, race conditions in complex multithreaded timelines, and technical debt that hampers the integration of modern hardware acceleration paradigms.1 This report outlines a comprehensive technical specification for "Rust-NLE," a desktop-based video editing application designed to replicate the core functionality of Adobe Premiere Pro while leveraging the safety, concurrency, and performance characteristics of the Rust programming language.  
-The objective is to architect a system that resolves the "pain points" of legacy NLEs: application instability, UI latency during playback, and inefficient resource utilization. By adopting a modern stack centered on wgpu for graphics, ffmpeg-next for media decoding, and cpal for audio, Rust-NLE aims to provide a professional-grade editing experience on Windows, macOS, and Linux. This document serves as the definitive architectural blueprint for engineering teams, detailing data structures, threading models, pipeline designs, and UI frameworks necessary to achieve feature parity with industry standards.3
+The objective is to architect a system that resolves the "pain points" of legacy NLEs: application instability, UI latency during playback, and inefficient resource utilization. By adopting a modern stack centered on wgpu for graphics, ffmpeg-next for hardware-accelerated media decoding (NVDEC), and cpal for audio, Rust-NLE aims to provide a professional-grade editing experience on Windows, macOS, and Linux. This document serves as the definitive architectural blueprint for engineering teams, detailing data structures, threading models, pipeline designs, and UI frameworks necessary to achieve feature parity with industry standards.3
 
 ### **1.2 The Case for Rust in Non-Linear Editing**
 
@@ -99,7 +99,7 @@ Decoding is an I/O bound and CPU/GPU bound operation that must not block the mai
 
 * **Actor Model:** Each active clip in the timeline is assigned a DecoderActor.  
 * **Message Passing:** The Render Engine sends RequestFrame(Timecode) messages to the Actor.  
-* **Internal State:** The Actor maintains an open AVFormatContext and AVCodecContext.
+* **Internal State:** The Actor maintains an open AVFormatContext and AVCodecContext (via ffmpeg-next), configured for hardware acceleration (NVDEC) where available.
 
 #### **3.2.2 Seeking Strategy**
 
@@ -309,6 +309,7 @@ Editing 4K/8K H.265 footage requires massive CPU resources for decoding.
   * Undo/Redo stack with rkyv snapshots.  
   * Project persistence (Save/Load).  
   * Gap Buffer/Piece Table finalization.
+  * **AI Workloads:** Integration of CUDA via `cudarc` for heavy compute tasks (Magic Mask, Upscaling) on Nvidia hardware.
 
 ### **Phase 4: Professional Features (Months 10-12)**
 
@@ -331,7 +332,8 @@ While the engineering effort is significant—particularly in the realm of hardw
 
 | Domain | Crate/Library | Purpose | Justification |
 | :---- | :---- | :---- | :---- |
-| **Video Decode** | ffmpeg-next | Demuxing/Decoding | Only viable library with broad codec support.13 |
+| **Video Decode** | ffmpeg-next | Demuxing/Decoding (NVDEC) | Only viable library with broad codec support and hardware acceleration.13 |
+| **AI Compute** | cudarc | AI/ML Workloads | Safe Rust wrapper for CUDA Driver API for heavy compute effects. |
 | **Graphics** | wgpu | Rendering/Compute | Cross-platform, WebGPU standard, safe abstraction.5 |
 | **Audio I/O** | cpal | Audio Hardware HAL | Rust standard for low-level audio access.6 |
 | **Audio DSP** | fundsp / dasp | Mixing Graph | Efficient, functional graph syntax.26 |
