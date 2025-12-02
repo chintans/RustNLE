@@ -56,7 +56,7 @@ pub fn mix_signals(signals: &[&[f32]]) -> f32 {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use crate::mix_signals;
 
     #[test]
     fn test_stereo_summing() {
