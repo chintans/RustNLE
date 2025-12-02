@@ -62,11 +62,9 @@ mod tests {
     fn test_stereo_summing() {
         let signal_a = vec![0.5, 0.5]; // Left, Right
         let signal_b = vec![0.2, 0.2];
-        // This test logic in the plan was slightly weird: "mix_signals(&[&signal_a, &signal_b]) -> 0.7"
-        // Usually mixing is per-sample.
-        // Let's implement a simple per-sample mix test.
 
-        let mixed_sample = signal_a[0] + signal_b[0];
-        assert!((mixed_sample - 0.7f32).abs() < f32::EPSILON);
+        let mixed = mix_signals(&[&signal_a[..], &signal_b[..]]);
+        // 0.5 + 0.5 + 0.2 + 0.2 = 1.4
+        assert!((mixed - 1.4f32).abs() < f32::EPSILON);
     }
 }
